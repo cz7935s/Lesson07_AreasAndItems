@@ -32,6 +32,8 @@ public record CreatureBuilder
 
     /// <summary>
     /// Puts the creature together from whatever parts have been set.
+    /// TODO: We need to revisit CreatureBuilder so that they are added into the GameData!  
+    /// We need to inject GameData here, and then Build can return the creature's name (or null), just like AreaBuilder and ItemBuilder do.
     /// </summary>
     public Creature Build() =>
         Creature.Create(_name, _healthPoints, _abilities, _experienceReward);
