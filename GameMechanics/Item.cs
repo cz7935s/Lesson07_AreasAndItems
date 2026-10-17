@@ -6,8 +6,13 @@ namespace TheWorld.GameMechanics;
 public record Item
 {
     /// <summary>
+    /// The item's key in the GameData.  It starts out as the name, and can be anything unique.
+    /// </summary>
+    public string Id { get; init; }
+
+    /// <summary>
     /// The name must be provided at construction time.
-    /// It is also the item's key in the GameData.
+    /// It is what the player reads.
     /// </summary>
     public string Name { get; init; } = string.Empty;
     /// <summary>
@@ -23,6 +28,7 @@ public record Item
     /// <returns></returns>
     internal Item(string name, string description)
     {
+        Id = name;
         Name = name;
         Description = description;
     }

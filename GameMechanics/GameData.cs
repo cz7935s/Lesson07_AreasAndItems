@@ -2,7 +2,8 @@ namespace TheWorld.GameMechanics;
 
 /// <summary>
 /// All the data in the game!
-/// This is the one place where all the Areas, Items, and Creatures are stored, each one under its name.
+/// This is the one place where all the Areas, Items, and Creatures are stored, each one under its key.
+/// An item's key is its Id.  Areas and creatures still use their names, for now.
 /// It is injected into every builder, so that they can add their new creations to the game data.
 ///
 /// TODO: we need to add Players here too, so that we can save and load the game state eventually.
@@ -30,14 +31,14 @@ public record GameData
     //--------------------------------------------------------------
 
     public bool TryAddArea(Area area) => Areas.TryAdd(area.Name, area);
-    public bool TryAddItem(Item item) => Items.TryAdd(item.Name, item);
+    public bool TryAddItem(Item item) => Items.TryAdd(item.Id, item);
     public bool TryAddCreature(Creature creature) => Creatures.TryAdd(creature.Name, creature);
 
     //--------------------------------------------------------------
-    //  Methods for retrieving Areas, Items, and Creatures by their name.
+    //  Methods for retrieving Areas, Items, and Creatures by their key.
     // TODO:  This is a very simple implementation.  It does not handle errors.  It is just a starting point.
     //--------------------------------------------------------------
     public Area? GetArea(string name) => Areas.GetValueOrDefault(name);
-    public Item? GetItem(string name) => Items.GetValueOrDefault(name);
+    public Item? GetItem(string id) => Items.GetValueOrDefault(id);
     public Creature? GetCreature(string name) => Creatures.GetValueOrDefault(name);
 }

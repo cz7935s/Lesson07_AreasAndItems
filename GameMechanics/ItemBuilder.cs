@@ -19,6 +19,11 @@ public record ItemBuilder
     public static ItemBuilder FromItem(Item item) => new() { _item = item };
 
     /// <summary>
+    /// Gives the item its own key, so that two items can share a name.
+    /// </summary>
+    public ItemBuilder WithId(string id) => this with { _item = _item with { Id = id } };
+
+    /// <summary>
     /// Adds a description to the item being built.  This is optional, but recommended.
     /// </summary>
     /// <param name="description"></param>
@@ -33,11 +38,11 @@ public record ItemBuilder
     /// Builds the item and adds it to the game data.
     /// </summary>
     /// <param name="gameData"></param>
-    /// <returns>The new item's name, or null if it couldn't be added.</returns>
+    /// <returns>The new item's Id, or null if it couldn't be added.</returns>
     public string? Build(GameData gameData)
     {
         if (gameData.TryAddItem(_item))
-            return _item.Name;
+            return _item.Id;
 
         return null;
     }

@@ -24,7 +24,7 @@ public record Area
     public IReadOnlyList<string> Creatures { get; init; } = [];
 
     /// <summary>
-    /// Items that are in this area are listed here, by name.
+    /// Items that are in this area are listed here, by Id.
     /// This is a reference to the Item, not the Item itself, so that we can look it up in the GameData.
     /// </summary>
     public IReadOnlyList<string> Items { get; init; } = [];

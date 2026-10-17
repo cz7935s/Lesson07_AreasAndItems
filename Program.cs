@@ -32,10 +32,18 @@ var tree = ItemBuilder
 
 Console.WriteLine(gameData.GetItem(tree!)?.Examine() ?? "nothing to look at");
 
+// A second tree, with the same name and a key of its own.
+var tree2 = ItemBuilder
+    .FromName("Tree")
+    .WithId("tree-2")
+    .WithDescription("Another big tree.")
+    .Build(gameData);
+
 var forest = AreaBuilder
     .FromName("Forest")
     .WithDescription("A dark forest.  It has a lot of trees.")
     .WithItem(tree!) // TODO: That ! is a hack.  We need to do something better someday...
+    .WithItem(tree2!)
     .Build(gameData);
 
 Console.WriteLine(gameData.GetArea(forest!)?.LookAround() ?? "nothing to look at");
