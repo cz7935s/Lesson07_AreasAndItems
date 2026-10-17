@@ -7,6 +7,9 @@ using static TheWorld.Rules.DiceRollStrategies;
 
 // This is the one Random Number Generator for the whole program.  We inject it everywhere a roll happens.
 Random rng = new();
+// This is the one GameData for the whole program.  We inject it everywhere a new entity is created, so that it can be added to the game data.
+GameData gameData = new();
+
 
 // The party.  Bree is the wizard;  Tamsin is the fighter.
 var bree = StockPlayers.Bree;
@@ -21,6 +24,20 @@ var player = PlayerBuilder
 
 // What they're up against.
 var goblin = StockCreatures.Goblin;
+
+// Somewhere for them to be.  Each thing goes into the GameData once, under its name.
+// TODO:  This is the long way around.  Builders can do this for us.
+gameData.TryAddItem(new Item("Tree", "A big tree.  It has a lot of leaves."));
+
+Console.WriteLine(gameData.GetItem("Tree")?.Examine() ?? "nothing to look at");
+
+gameData.TryAddArea(new Area("Forest")
+{
+    Description = "A dark forest.  It has a lot of trees.",
+    Items = ["Tree"]
+});
+
+Console.WriteLine(gameData.GetArea("Forest")?.LookAround() ?? "nothing to look at");
 
 player.ShowSheet();
 

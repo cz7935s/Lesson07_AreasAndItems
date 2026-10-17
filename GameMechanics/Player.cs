@@ -11,6 +11,8 @@ namespace TheWorld.GameMechanics;
 /// </summary>
 public record Player
 {
+    // TODO: Players belong in the GameData too.  Then PlayerBuilder can add them, the way the other builders do.
+
     public string Name { get; }
     
     public PlayerLevel Level { get; }
