@@ -3,4 +3,15 @@
 // and then Returns an Integer (presumably from a dice-roll, but that's up to the programmer).
 global using DiceRollStrategy = System.Func<System.Random, TheWorld.GameMechanics.Dice, int>;
 
+namespace TheWorld;
 
+public static class Helpers
+{
+    /// <returns>The trimmed name, or "Blob" when there's nothing there but White-Space.</returns>
+    public static string ValidateString(string name) =>
+        name switch
+        {
+            var n when string.IsNullOrWhiteSpace(n) => "Blob",
+            _ => name.Trim()
+        };
+}
