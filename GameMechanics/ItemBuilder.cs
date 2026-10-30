@@ -9,6 +9,7 @@ public record ItemBuilder
     public static ItemBuilder FromItem(Item item) => new() { _item = item };
 
     public ItemBuilder WithDescription(string description) => this with { _item = _item with { Description = description } };
+    public ItemBuilder WithID(string id) => this with { _item = _item with { ID = id } };
 
     public string? Build(GameData gameData)
     {

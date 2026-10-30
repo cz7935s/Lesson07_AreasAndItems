@@ -15,16 +15,20 @@ public record Item
     /// </summary>
     public string Description { get; init; } = string.Empty;
 
+    public string ID { get; init; } = string.Empty;
+
     /// <summary>
     /// Sometimes it is ok to expose a constructor, but not always. 
     /// </summary>
     /// <param name="name"></param>
     /// <param name="description"></param>
+    /// <param name="id" />
     /// <returns></returns>
     internal Item(string name, string description)
     {
         Name = name;
         Description = description;
+        ID = name;
     }
 
     /// <summary>

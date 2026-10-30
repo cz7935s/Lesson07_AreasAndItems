@@ -16,6 +16,7 @@ public record Area
     /// This is the interesting description of the area, which is shown to the player when they enter it.
     /// </summary>
     public string Description { get; init; } = string.Empty;
+    
 
     /// <summary>
     /// Creatures that live in this area are listed here, by name.
@@ -33,6 +34,9 @@ public record Area
     /// TODO: this will come later, because self-reference is WILD.
     /// </summary>
     public IReadOnlyList<string> Neighbors { get; init; } = [];
+    
+    public string ID { get; init; } = string.Empty;
+
 
     /// <summary>
     /// Sometimes it is ok to expose a constructor, but not always.  

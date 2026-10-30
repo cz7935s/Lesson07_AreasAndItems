@@ -16,6 +16,8 @@ public record CreatureBuilder
     private HealthPoints _healthPoints = HealthPoints.Create(1);
     private AbilityScore _abilities = AbilityScore.Create(10, 10, 10, 10, 10, 10)!;
     private int _experienceReward = 0;
+    private Creature _creature;
+    
 
     /// <summary>
     /// Does Nothing, except force every caller to start from FromName.
@@ -30,6 +32,12 @@ public record CreatureBuilder
     public CreatureBuilder WithHealthPoints(HealthPoints hp) => this with { _healthPoints = hp };
     public CreatureBuilder WithAbilities(AbilityScore abilities) => this with { _abilities = abilities };
     public CreatureBuilder WithExperienceReward(int xp) => this with { _experienceReward = xp };
+    public CreatureBuilder WithID(string id) => this with { _creature = _creature with { ID = id } };
+    
+    public static CreatureBuilder FromCreature(Creature creature) =>
+        new()
+    
+
 
     /// <summary>
     /// Puts the creature together from whatever parts have been set.
@@ -37,5 +45,11 @@ public record CreatureBuilder
     public Creature Build() =>
         Creature.Create(_name, _healthPoints, _abilities, _experienceReward);
 
-    
+    public string? Build(GameData gameData)
+    {
+        var creature = Build();
+        if (gameData.TryAddCreature(creature))
+            return creature.ID;
+        return null;
+    }
 }
